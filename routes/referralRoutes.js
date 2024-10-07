@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Referral = require('../models/Referral');
+const Referral = require("../models/referral");
 
 const getClientIp = (req) => {
     return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
