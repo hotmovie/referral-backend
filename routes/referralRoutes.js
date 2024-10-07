@@ -3,7 +3,8 @@ const router = express.Router();
 const Referral = require("../models/referral");
 
 const getClientIp = (req) => {
-    return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    return req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0].trim() : req.connection.remoteAddress;
+
 };
 
 // Route to store a referral ID
