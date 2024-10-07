@@ -28,7 +28,7 @@ router.post('/storeReferral', async (req, res) => {
         referral = new Referral({
             referralId,
             clickCount: 0,
-            userPoints: 10 // Initial points given to new users
+            userPoints: 5 // Initial points given to new users
         });
 
         await referral.save();
