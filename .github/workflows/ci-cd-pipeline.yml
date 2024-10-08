@@ -1,0 +1,34 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch if different
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.16.0'  # Specify your Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test  # Replace with your test command
+
+      - name: Deploy to AWS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}  # Your EC2 instance's public IP or DNS
+          username: ec2-user  # Change if your username is different
+          key: ${{ secrets.EC2_PRIVATE_KEY }}  # Add your private key as a secret
+          port: 22  # Default SSH port
+          source: "."
+          target: "/home/ec2-user/referral-backend"  # Path where you want to deploy
