@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Change this to your default branch if 
+      - main  # Change this to your default branch
 
 jobs:
   build:
