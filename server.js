@@ -9,6 +9,13 @@ const app = express();
 app.use(express.json());
 app.use(cors()); // Enable CORS for all origins
 
+
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+
+// Serve static files (optional, if you have CSS or images)
+app.use(express.static('public'));
+
 app.use((req, res, next) => {
     console.log(req.url);
     next();

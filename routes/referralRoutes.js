@@ -155,4 +155,25 @@ router.post('/updatePoints', async (req, res) => {
     }
 });
 
+// In routes/referral.js
+
+router.get('/dashboard', async (req, res) => {
+    try {
+        // Fetch all referrals
+        const referrals = await Referral.find({});
+
+        // Get the total number of referral IDs
+        const totalReferralCount = await Referral.countDocuments();
+
+        // Render the dashboard view and pass both referrals and totalReferralCount
+        res.render('dashboard', { referrals, totalReferralCount });
+    } catch (error) {
+        console.error('Error fetching referrals for dashboard:', error);
+        res.status(500).send('Error fetching referrals for dashboard');
+    }
+});
+
+
+
+
 module.exports = router;
