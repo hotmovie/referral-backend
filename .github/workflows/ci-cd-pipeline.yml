@@ -29,3 +29,4 @@ jobs:
           port: 22  # Default SSH port
           source: "."
           target: "/home/ec2-user/referral-backend"  # Path where you want to deploy
+          debug: true
