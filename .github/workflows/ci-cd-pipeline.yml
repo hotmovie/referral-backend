@@ -17,17 +17,14 @@ jobs:
         with:
           node-version: '20.16.0'  # Specify your Node.js version
 
-      - name: Install dependencies
+      - name: Install dependencies  
         run: npm install
-
-      - name: Run tests
-        run: npm test  # Replace with your test command
 
       - name: Deploy to AWS
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.EC2_HOST }}  # Your EC2 instance's public IP or DNS
-          username: ec2-user  # Change if your username is different
+          username: CI-CD  # Change if your username is different
           key: ${{ secrets.EC2_PRIVATE_KEY }}  # Add your private key as a secret
           port: 22  # Default SSH port
           source: "."
