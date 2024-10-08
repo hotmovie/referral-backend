@@ -30,3 +30,6 @@ jobs:
           source: "."
           target: "/home/ec2-user/referral-backend"  # Path where you want to deploy
           debug: true
+      
+      - name: Restart PM2 Processes
+        run: ssh -i ${{ secrets.EC2_PRIVATE_KEY }} -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} "pm2 restart all"
