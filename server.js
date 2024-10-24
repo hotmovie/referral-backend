@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGO_URI, {})
 app.use('/api', referralRoutes); // Use referral routes for /api endpoint
 
 // Initialize the Telegram bot
-const token = process.env.TELEGRAM_BOT_TOKEN; // Use your bot token from environment variables
+const token = "7600581723:AAG7hYBLiNr6b30adTZoKNZwT7t8-9QPpng"; // Use your bot token from environment variables
 const userStates = {};
 const bot = new TelegramBot(token, { polling: true });
 
