@@ -32,4 +32,9 @@ jobs:
           debug: true
       
       - name: Restart PM2 Processes
-        run: ssh -i ${{ secrets.EC2_PRIVATE_KEY }} -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} "pm2 restart all"
+        run: |
+          echo "${{ secrets.EC2_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+          ssh -i key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} "pm2 restart all"
+        env:
+          EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}  # Make sure to set this in your secrets
