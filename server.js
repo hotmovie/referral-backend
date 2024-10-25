@@ -49,7 +49,7 @@ const token = process.env.TELEGRAM_BOT_TOKEN; // Use your bot token from environ
 const userStates = {};
 const bot = new TelegramBot(token, {
     polling: {
-        interval: 100, // milliseconds
+        interval: 1000, // milliseconds
         timeout: 10,
         autoStart: true,
         dropPendingUpdates: true, // Option to drop pending updates if your bot can't keep up
@@ -70,7 +70,6 @@ bot.on('message', async (msg) => {
     } catch (err) {
         console.error('Error saving message to database:', err);
     }
-
     // Check if the user has sent a message before
     if (!userStates[chatId]) {
         // If not, send the "Hello" message and set their state
@@ -79,7 +78,9 @@ bot.on('message', async (msg) => {
                 console.error(`Failed to send message to chat ${chatId}:`, err);
             });
         userStates[chatId] = 1; // Mark that the user has sent their first message
-    } else if (userStates[chatId] === 1) {
+    }
+    
+    if (userStates[chatId] == 1) {
         // If the user has already sent one message, send the subscription alert
         const replyMessage = `🚨 <b>Price Drop Alert!</b> 🚨  
 💸 <b>Join Our Premium Channel for Less!</b> 💸  
@@ -102,7 +103,9 @@ bot.on('message', async (msg) => {
         
         // Update the user's state
         userStates[chatId] = 2; // Mark that the user has sent their second message
-    } else if (userStates[chatId] === 2) {
+    }
+    
+    else if (userStates[chatId] === 2) {
         // If the user has already sent two messages, send the query message
         const queryMessage = `For more queries, you can message us here: https://t.me/team_bigCity`;
         
